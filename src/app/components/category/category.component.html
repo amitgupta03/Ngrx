@@ -1,0 +1,32 @@
+<button *ngIf="showDetailPage" (click)="showDetailPage = false">Add Product</button>
+<div *ngIf="showDetailPage" class="accordion-container">
+  <div *ngFor="let category of categories; let i = index" class="accordion">
+    <div
+      class="accordion-header"
+      [class.active]="category.active"
+      (click)="toggleAccordion(i, category.category)"
+    >
+      <span class="category-name">{{ category.category }}</span>
+      <i class="fa fa-angle-down" [ngClass]="{ active: category.active }"></i>
+      <i class="fa fa-angle-up" [ngClass]="{ active: !category.active }"></i>
+    </div>
+    <div class="accordion-panel" [class.show]="category.active">
+      <ul *ngFor="let product of uniqueProduct">
+        <li (click)="detailsData(product)">{{ product.title }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="!showDetailPage && detailDataPass">
+  <app-product
+    [productDetails]="detailDataPass"
+    (valueChange)="displayCatgory($event)"
+  ></app-product>
+</div>
+
+<div *ngIf="!showDetailPage && !detailDataPass">
+  <app-product
+    [addProduct]="true"
+    (valueChange)="displayCatgory($event)"
+  ></app-product>
+</div>

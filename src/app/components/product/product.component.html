@@ -1,0 +1,141 @@
+<form [formGroup]="contactForm" class="container">
+  <div class="product-detail">
+    <div class="product-image" *ngIf="!addProduct">
+      <img src="{{ productDetails?.thumbnail }}" alt="Product Image" />
+    </div>
+    <div class="product-image" *ngIf="addProduct">
+      <input type="file" accept="image/*" formControlName="thumbnail" (change)="loadFile($event)"/>
+      <img id="output" class="product-image"/>
+    </div>
+    <div class="product-info">
+      <h1 class="product-title" *ngIf="showEdit">
+        {{ productDetails?.title || contactForm.value.title }}
+      </h1>
+      <input
+        type="text"
+        name="title"
+        *ngIf="!showEdit"
+        placeholder="Title"
+        formControlName="title"
+      />
+      <p class="product-price" *ngIf="showEdit">
+        Price: {{ productDetails?.price || contactForm.value.price }}
+      </p>
+      <input
+        type="text"
+        name="price"
+        *ngIf="!showEdit"
+        placeholder="Price"
+        formControlName="price"
+      />
+      <input
+        type="text"
+        name="brand"
+        *ngIf="addProduct"
+        placeholder="Brand"
+        formControlName="brand"
+      />
+      <select
+        formControlName="category"
+        placeholder="category"
+        *ngIf="addProduct"
+      >
+        <option value="smartphones">smartphones</option>
+        <option value="laptops">laptops</option>
+        <option value="fragrances">fragrances</option>
+        <option value="skincare">skincare</option>
+        <option value="groceries">groceries</option>
+        <option value="home-decoration">home-decoration</option>
+      </select>
+      <p class="product-rating" *ngIf="showEdit">
+        Rating: {{ productDetails?.rating || contactForm.value.rating }}
+      </p>
+      <input
+        type="text"
+        *ngIf="!showEdit"
+        name="rating"
+        placeholder="rating"
+        formControlName="rating"
+      />
+      <p class="product-rating" *ngIf="showEdit">
+        Description:
+        {{ productDetails?.description || contactForm.value.description }}
+      </p>
+      <textarea
+        name="description"
+        *ngIf="!showEdit"
+        placeholder="Description"
+        formControlName="description"
+      ></textarea>
+      <p class="product-stock" *ngIf="showEdit">
+        Stock: {{ productDetails?.stock || contactForm.value.stock }}
+      </p>
+      <input
+        type="text"
+        *ngIf="!showEdit"
+        name="stock"
+        placeholder="stock"
+        formControlName="stock"
+      />
+
+      <p class="discount-label" *ngIf="showEdit">
+        Discount:
+        {{
+          productDetails?.discountPercentage ||
+            contactForm.value.discountPercentage
+        }}
+        off
+      </p>
+      <input
+        type="text"
+        *ngIf="!showEdit"
+        name="Discount"
+        placeholder="Discount"
+        formControlName="discountPercentage"
+      />
+
+      <input
+        type="submit"
+        *ngIf="!showEdit && !addProduct"
+        value="Update"
+        (click)="updateProduct()"
+      />
+      <input
+        type="submit"
+        *ngIf="!showEdit && !addProduct"
+        value="Cancel"
+        (click)="showEdit = !showEdit"
+      />
+      <input
+        type="button"
+        *ngIf="showEdit && !addProduct"
+        value="Back"
+        (click)="valueChanged()"
+      />
+      <input
+        type="submit"
+        *ngIf="showEdit && !addProduct"
+        value="Delete"
+        (click)="deleteProduct()"
+      />
+      <input
+        type="submit"
+        *ngIf="addProduct"
+        value="Add Product"
+        (click)="addNewProduct()"
+      />
+      <input
+        type="submit"
+        *ngIf="addProduct"
+        value="Cancel"
+        (click)="valueChanged()"
+      />
+    </div>
+  </div>
+  <i
+    class="fa fa-edit"
+    style="font-size: 24px"
+    *ngIf="showEdit"
+    (click)="editPage()"
+  ></i>
+</form>

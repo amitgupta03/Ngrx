@@ -1,0 +1,68 @@
+/* component.css */
+
+/* Accordion Container */
+.accordion-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Accordion Header */
+  .accordion-header {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .accordion-header:hover {
+    background-color: #ddd;
+    text-transform: uppercase;
+  }
+  
+  .accordion-header.active {
+    background-color: #ddd;
+  }
+  
+  /* Accordion Panel */
+  .accordion-panel {
+    display: none;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .accordion-panel.show {
+    display: block;
+  }
+  
+
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .category-name {
+    flex: 1;
+  }
+  
+  .fa {
+    font-size: 20px;
+  }
+  
+  .fa-angle-down.active,
+  .fa-angle-up.active {
+    display: none;
+  }
+  
+  .fa-angle-up.active {
+    transform: rotate(180deg);
+  }
+  
