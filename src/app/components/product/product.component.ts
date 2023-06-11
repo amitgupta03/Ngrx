@@ -25,12 +25,12 @@ export class ProductComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder
   ) {}
 
-  @Input() productDetails: any;
+  @Input() productDetails: any; // receiving the product details
   @Input() addProduct: boolean = false;
 
   ngOnInit() {}
   ngOnChanges() {
-    this.createContactForm();
+    this.createContactForm(); // initialize the form
 
     if (!this.productDetails) {
       this.editPage();
@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit, OnChanges {
       stock: [''],
       discountPercentage: [''],
       brand: [''],
-      category: this.addProduct ? ['', Validators.required] : [''],
+      category: this.addProduct ? ['', Validators.required] : [''],  // reuired when adding the product
       thumbnail: [''],
     });
   }
@@ -78,7 +78,7 @@ export class ProductComponent implements OnInit, OnChanges {
 
   deleteProduct() {
     this.productFacade.deleteProduct({
-      id: this.productDetails ? this.productDetails.id : this.enableEditMode(),
+      id:  this.productDetails?.id,
     });
     this.actionPerformed='delete';
     alert('Product Have beed Deleted Successfully!');

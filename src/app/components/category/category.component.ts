@@ -56,4 +56,9 @@ export class CategoryComponent {
   displayCatgory(e: any) {
     this.showDetailPage = e;
   }
+
+  AddProduct() {
+    this.showDetailPage=false;
+    this.detailDataPass=null;
+  }
 }

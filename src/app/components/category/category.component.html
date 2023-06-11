@@ -1,4 +1,12 @@
-<button *ngIf="showDetailPage" (click)="showDetailPage = false">Add Product</button>
+<!-- main component -->
+
+<!-- add new Product -->
+<div class="header">
+  <h1>Product List</h1>
+  <!-- add new Product -->
+  <button *ngIf="showDetailPage" (click)="AddProduct()">Add Product</button>
+</div>
+<!-- accordion comes from here -->
 <div *ngIf="showDetailPage" class="accordion-container">
   <div *ngFor="let category of categories; let i = index" class="accordion">
     <div
@@ -17,16 +25,24 @@
     </div>
   </div>
 </div>
+
+<!-- end accordion -->
+
+<!-- details product -->
 <div *ngIf="!showDetailPage && detailDataPass">
+  <!-- child component -->
   <app-product
     [productDetails]="detailDataPass"
     (valueChange)="displayCatgory($event)"
   ></app-product>
 </div>
+<!-- details End -->
 
+<!-- add product -->
 <div *ngIf="!showDetailPage && !detailDataPass">
   <app-product
     [addProduct]="true"
     (valueChange)="displayCatgory($event)"
   ></app-product>
 </div>
+<!-- end Add product -->

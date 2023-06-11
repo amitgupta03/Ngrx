@@ -4,11 +4,14 @@ h1 {
 
 .product-detail {
   margin-bottom: 20px;
+  display: flex;
 }
 
 .product-image {
   text-align: center;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  padding-right: 2rem;
+  margin-top: 2rem;
 }
 
 .product-image img {
@@ -17,6 +20,7 @@ h1 {
 
 .product-info {
   margin-top: 20px;
+  max-width: 35rem;
 }
 
 .product-title {
@@ -83,4 +87,200 @@ input[type="button"]:hover {
 .container{
   display: flex;
   justify-content: center
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  h1 {
+    color: #333;
+  }
+  
+  .product-detail {
+    margin-bottom: 20px;
+    display: flex;
+  }
+  
+  .product-image {
+    text-align: center;
+    /* margin-bottom: 10px; */
+    padding-right: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .product-image img {
+    max-width: 200px;
+  }
+  
+  .product-info {
+    margin-top: 20px;
+    max-width: 35rem;
+  }
+  
+  .product-title {
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .product-price {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .product-rating {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .product-description {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .product-stock {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .discount-label {
+    font-weight: bold;
+    color: red;
+  }
+  
+  input[type="text"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="submit"],
+  input[type="button"] {
+    padding: 10px 20px;
+    background-color: black;
+    margin-left: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background-color: black;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* Mobile/Tablet Styles */
+@media (max-width: 767px) {
+  h1 {
+    color: #333;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  .product-detail {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .product-image {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .product-image img {
+    max-width: 100%;
+  }
+  
+  .product-info {
+    margin-top: 20px;
+    max-width: 100%;
+  }
+  
+  .product-title {
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .product-price {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .product-rating {
+    font-size: 14px;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .product-description {
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .product-stock {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .discount-label {
+    font-weight: bold;
+    color: red;
+  }
+  
+  input[type="text"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="submit"],
+  input[type="button"] {
+    padding: 10px 20px;
+    background-color: black;
+    margin-left: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background-color: black;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  }
 }
