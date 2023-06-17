@@ -6,7 +6,7 @@ import * as ProductSelectors from '../product/product.selectors';
 import { Product } from 'src/app/category.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductFacade {
   products$: Observable<Product> = this.store.select(

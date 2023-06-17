@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import * as ProductActions from './product.actions';
 import { CategoryService } from 'src/app/service.ts/category.service';
@@ -27,34 +27,42 @@ export class ProductEffects {
     this.actions$.pipe(
       ofType(ProductActions.updateProduct), // Dispatch this action to trigger the effect
       mergeMap((action: any) => {
-        if (action.actionType === 'update') {
-          return this.categoryService.updateProduct('', action).pipe(
-            map(() => ProductActions.UpdateProductSuccess(action)),
-            catchError((error: any) =>
-              of(ProductActions.UpdateProductFailure({ error }))
-            )
-          );
-        } else if (action.actionType === 'delete') {
-          return this.categoryService.deleteProduct('', action).pipe(
-            map(() => ProductActions.removeProductSuccess(action)),
-            catchError((error: any) =>
-              of(ProductActions.removeProductFailure({ error }))
-            )
-          );
-        } else if (action.actionType === 'add') {
-          return this.categoryService.addProduct('', action).pipe(
-            map(() => ProductActions.addProductSuccess(action)),
-            catchError((error: any) =>
-              of(ProductActions.addProductFailure({ error }))
-            )
-          );
-        } else {
-          console.log('No Action');
-          return of();
+        let source$: Observable<any>;
+        switch (action.actionType) {
+          case 'update':
+            source$ = this.categoryService.updateProduct('', action).pipe(
+              map(() => ProductActions.UpdateProductSuccess(action)),
+              catchError((error: any) =>
+                of(ProductActions.UpdateProductFailure({ error }))
+              )
+            );
+            break;
+          case 'delete':
+            source$ = this.categoryService.deleteProduct('', action).pipe(
+              map(() => ProductActions.removeProductSuccess(action)),
+              catchError((error: any) =>
+                of(ProductActions.removeProductFailure({ error }))
+              )
+            );
+            break;
+          case 'add':
+            source$ = this.categoryService.addProduct('', action).pipe(
+              map(() => ProductActions.addProductSuccess(action)),
+              catchError((error: any) =>
+                of(ProductActions.addProductFailure({ error }))
+              )
+            );
+            break;
+          default:
+            console.log('No Action');
+            source$ = of();
+            break;
         }
+        return source$;
       })
     )
   );
+
   constructor(
     private actions$: Actions,
     private categoryService: CategoryService

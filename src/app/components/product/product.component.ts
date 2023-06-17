@@ -8,7 +8,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProductFacade } from 'src/app/store/product/product.facade';
+import { ProductFacade } from '../../store/product/product.facade';
 
 @Component({
   selector: 'app-product',
@@ -23,15 +23,15 @@ export class ProductComponent implements OnInit, OnChanges {
   constructor(
     private productFacade: ProductFacade,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    this.createContactForm(); // initialize the form
+  }
 
   @Input() productDetails: any; // receiving the product details
   @Input() addProduct: boolean = false;
 
   ngOnInit() {}
   ngOnChanges() {
-    this.createContactForm(); // initialize the form
-
     if (!this.productDetails) {
       this.editPage();
     } else {
@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit, OnChanges {
       stock: [''],
       discountPercentage: [''],
       brand: [''],
-      category: this.addProduct ? ['', Validators.required] : [''],  // reuired when adding the product
+      category: this.addProduct ? ['', Validators.required] : [''], // reuired when adding the product
       thumbnail: [''],
     });
   }
@@ -63,13 +63,16 @@ export class ProductComponent implements OnInit, OnChanges {
       discountPercentage: this.productDetails.discountPercentage,
       brand: this.productDetails.brand,
       category: this.addProduct ? this.productDetails.category : '',
-      thumbnail: this.productDetails.thumbnail
+      thumbnail: this.productDetails.thumbnail,
     });
   }
 
   valueChanged() {
     this.valueChange.emit(true);
-    this.productFacade.updateProduct({...this.productDetails, actionType: this.actionPerformed});
+    this.productFacade.updateProduct({
+      ...this.productDetails,
+      actionType: this.actionPerformed,
+    });
   }
 
   editPage() {
@@ -78,9 +81,9 @@ export class ProductComponent implements OnInit, OnChanges {
 
   deleteProduct() {
     this.productFacade.deleteProduct({
-      id:  this.productDetails?.id,
+      id: this.productDetails?.id,
     });
-    this.actionPerformed='delete';
+    this.actionPerformed = 'delete';
     alert('Product Have beed Deleted Successfully!');
   }
 
@@ -93,7 +96,6 @@ export class ProductComponent implements OnInit, OnChanges {
       rating: this.contactForm.value.rating,
       stock: this.contactForm.value.stock,
       discountPercentage: this.contactForm.value.discountPercentage,
-     
     };
     this.showEdit = true;
     this.actionPerformed = 'update';
@@ -113,8 +115,7 @@ export class ProductComponent implements OnInit, OnChanges {
       discountPercentage: this.contactForm.value.discountPercentage,
     };
     this.productFacade.addProduct(newProduct);
-    console.log(this.contactForm.value);
-    this.actionPerformed='add';
+    this.actionPerformed = 'add';
     this.addProduct = false;
     this.showEdit = true;
   }
@@ -124,10 +125,10 @@ export class ProductComponent implements OnInit, OnChanges {
     this.showEdit = true;
   }
 
-  loadFile(event:any) {
+  loadFile(event: any) {
     var reader = new FileReader();
-    reader.onload = function(){
-      var output:any = document.getElementById('output');
+    reader.onload = function () {
+      var output: any = document.getElementById('output');
       output.src = reader.result;
     };
     reader.readAsDataURL(event.target.files[0]);

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Observable, concatMap, filter, of, tap } from 'rxjs';
-import { Category } from 'src/app/category.model';
-import { CategoryFacade } from 'src/app/store/category/category.facade';
-import { ProductFacade } from 'src/app/store/product/product.facade';
+import { CategoryFacade } from '../../store/category/category.facade';
+import { ProductFacade } from '../../store/product/product.facade';
 
 @Component({
   selector: 'app-category',
@@ -29,7 +27,6 @@ export class CategoryComponent {
     this.categoryFacade.categories$.subscribe((categories: any) => {
       if (categories.length > 0) {
         this.categories = categories.map((v: any) => ({ ...v, active: false }));
-        console.log(this.categories[1].active, this.categories[1].active);
       }
     });
   }
@@ -58,7 +55,7 @@ export class CategoryComponent {
   }
 
   AddProduct() {
-    this.showDetailPage=false;
-    this.detailDataPass=null;
+    this.showDetailPage = false;
+    this.detailDataPass = null;
   }
 }
